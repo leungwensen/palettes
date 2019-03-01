@@ -37,6 +37,7 @@ module.exports = {
     'chroma-js': 'chroma',
     'dat.gui': 'dat',
     'plotly.js': 'Plotly',
+    'vanilla-picker': 'Picker',
     jquery: 'jQuery',
     lodash: '_',
   }

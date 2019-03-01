@@ -30,6 +30,7 @@ module.exports = {
   },
   devServer: {
     // contentBase: path.resolve(__dirname, 'assets')
+    open: true,
     publicPath: '/assets/'
   },
   externals: {

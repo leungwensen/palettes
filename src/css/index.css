@@ -4,3 +4,44 @@
   padding-top: 2em;
   padding-bottom: 2em;
 } */
+
+#root .ant-list-item {
+  padding: 8px;
+  border: 2px solid white;
+  cursor: pointer;
+}
+
+#root .ant-list-item:hover {
+  border: 2px dashed black;
+}
+
+#root .ant-list-item.selected, #root .ant-list-item.selected:hover {
+  border: 2px solid black;
+}
+
+.preset-palette-colors:hover {
+  border: 2px solid black!important;
+  cursor: pointer;
+}
+
+.color-picker-container .sketch-picker {
+  box-shadow: none!important;
+}
+
+#root .ant-list-item .anticon-delete {
+  float: right;
+  font-size: 20px; 
+  opacity: 0;
+}
+#root .ant-list-item:hover .anticon-delete {
+  opacity: 1;
+}
+
+#root tr .anticon-plus-circle {
+  text-align: center;
+  font-size: 20px; 
+  opacity: 0;
+}
+#root tr:hover .anticon-plus-circle {
+  opacity: 1;
+}

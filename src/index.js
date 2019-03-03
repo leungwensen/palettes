@@ -1,156 +1,182 @@
+import 'antd/dist/antd.css';
+import './css/index.css';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import _ from 'lodash';
+import {
+  Menu,
+  Button,
+  Divider,
+  Drawer,
+  Icon,
+  Layout,
+  List,
+} from 'antd';
+import {
+  SketchPicker as Picker,
+} from 'react-color';
+import palettes from './palettes';
+import PresetPalettes from './components/preset-palettes';
+import DistanceMatrix from './components/distance-matrix';
+import GradientPaletteBy1 from './components/gradient-palette-by1';
+import GradientPaletteBy2 from './components/gradient-palette-by2';
+import VisInCharts from './components/vis-in-charts';
+import VisInColorSpace from './components/vis-in-color-space';
 
-// namespace
-require('./css/index.css');
-const palettes = require('./palettes');
-const $ = require('jquery');
-const dat = require('dat.gui');
-const Plotly = require('plotly.js');
-const chroma = require('chroma-js');
-const _ = require('lodash');
-const Picker = require('vanilla-picker');
+const {
+  Content, Footer, Sider,
+} = Layout;
 
-// preset palettes
-const palettesContainerSelector = '#palettes-container';
-const $palettesContainer = $(palettesContainerSelector);
+class App extends React.Component {
+  state = {
+    showPresetPalettes: false,
+    currentPalette: palettes.Tableau.Tableau_10.concat([]),
+    currentColor: palettes.Tableau.Tableau_10[0],
+    currentTab: 'VisInColorSpace',
+    sizeKey: window.innerWidth,
+  };
 
-_.each(palettes, (palette, name) => {
-    const sectionId = _.toLower(name);
-    // const show = (name === 'ColorBrewer2');
-    const show = false;
-    const $card = $('<div class="card"></div>');
-    const $header = $(`<div class="card-header">
-      <h3 class="mb-0">
-        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#${sectionId}">
-            ${name}
-        </button>
-      </h3>
-    </div>`);
-    $card.append($header);
-    const $body = $(`<div id="${sectionId}" class="collapse${show ? ' show' : ''}" data-parent="${palettesContainerSelector}">
-      <div class="card-body">
-      </div>
-    </div>`);
-    $card.append($body);
-    const $cardBody = $body.find('.card-body');
-    _.each(palette, (value, key) => {
-        $cardBody.append(`<h4>${key}</h4>`);
-        if (_.isArray(value)) {
-            $cardBody.append(`<table>
-              <tr>
-                ${value.map(item => `<td style="background: ${item};">${item}</td>`).join('')}
-              </tr>
-            </table>`);
-        } else if (_.isPlainObject(value)) {
-            _.each(value, (v, k) => {
-                $cardBody.append(`<h5>${k}</h5>`);
-                $cardBody.append(`<table>
-                  <tr>
-                    ${v.map(item => `<td style="background: ${item};">${item}</td>`).join('')}
-                  </tr>
-                </table>`);
-            });
-        }
-    });
-    $palettesContainer.append($card);
-});
-
-// color picker
-$colorPickerContainer = $('#color-picker-container');
-const picker = new Picker({
-    parent: $colorPickerContainer[0],
-    popup: false,
-    editor: true,
-});
-
-// palette 3d view
-const $dotSize = $('#3d-scatter-dot-size');
-const palette = palettes.ColorBrewer2.diverging.BrBG_10; // hex string
-let colorSpace = 'rgb';
-function draw3dScatter() {
-    const x = [];
-    const y = [];
-    const z = [];
-    _.each(palette, color => {
-        let components = [];
-        switch (colorSpace) {
-            case 'hsv':
-                components = chroma(color).hsv();
-                break;
-            case 'hsl':
-                components = chroma(color).hsl();
-                break;
-            case 'lab':
-                components = chroma(color).lab();
-                break;
-            default:
-                components = chroma(color).rgb();
-                break;
-        }
-        x.push(components[0]);
-        y.push(components[1]);
-        z.push(components[2]);
-    });
-
-    const trace = {
-        x: x,
-        y: y,
-        z: z,
-        mode: 'markers',
-        type: 'scatter3d',
-        name: 'Colors',
-        marker: {
-            size: $dotSize.val(),
-            color: palette
-        }
-    };
-    const data = [trace];
-    const layout = {
-        scene: {
-            camera: {
-                eye: {x: 0.001, y: -2, z: 1},
-                center: {x: 0, y: 0, z: 0}
-            }
-        },
-        margin: {
-            l: 0,
-            r: 0,
-            t: 0,
-            b: 0,
-            pad: 0
-        }
-    };
-    if (colorSpace === 'rgb') {
-        layout.scene.xaxis = {title: 'R', range: [0, 255]};
-        layout.scene.yaxis = {title: 'G', range: [0, 255]};
-        layout.scene.zaxis = {title: 'B', range: [0, 255]};
-    } else if (colorSpace === 'hsv') {
-        layout.scene.xaxis = {title: 'H', range: [0, 360]};
-        layout.scene.yaxis = {title: 'S', range: [0, 100]};
-        layout.scene.zaxis = {title: 'V', range: [0, 100]};
-    } else if (colorSpace === 'hsl') {
-        layout.scene.xaxis = {title: 'H', range: [0, 360]};
-        layout.scene.yaxis = {title: 'S', range: [0, 100]};
-        layout.scene.zaxis = {title: 'L', range: [0, 100]};
-    } else if (colorSpace === 'lab') {
-        layout.scene.xaxis = {title: 'L*', range: [0, 100]};
-        layout.scene.yaxis = {title: 'a*', range: [-86.185, 98.254]};
-        layout.scene.zaxis = {title: 'b*', range: [-107.863, 94.482]};
+  addToPalette = () => {
+    const { currentColor, currentPalette } = this.state;
+    if (currentPalette.indexOf(currentColor) === -1) {
+      currentPalette.push(currentColor)
+      this.setState({
+        currentPalette,
+      });
     }
-    Plotly.purge('3d-scatter');
-    Plotly.newPlot('3d-scatter', data, layout, {
-        displayModeBar: false
-    });
+  }
+
+  render() {
+    window.onresize = () => {
+      this.setState({
+        sizeKey: window.innerWidth,
+      });
+    }
+    return (
+      <Layout key={this.state.sizeKey}>
+        {/* sider */}
+        <Sider width={300}
+          style={{
+            overflow: 'auto', height: '100vh', position: 'fixed', left: 0, background: '#fff',
+            boxShadow: '2px 0px 2px 1px rgba(0, 0, 0, .1)'
+          }}>
+          <div
+            style={{ padding: '8px' }}>
+            <Button type="primary" onClick={() => {
+              this.setState({ showPresetPalettes: true });
+            }}>
+              preset palettes
+              <Icon type="right" />
+            </Button>
+            <div className="color-picker-container">
+              <Picker width={260} color={this.state.currentColor} presetColors={[]}
+                onChange={(color) => {
+                  this.setState({
+                    currentColor: color.hex
+                  });
+                }}/>
+              <p><Button block onClick={this.addToPalette}>add to palette</Button></p>
+            </div>
+            <Divider/>
+            <List size="small"
+              dataSource={this.state.currentPalette}
+              renderItem={(item, index) => (
+                <List.Item className={item === this.state.currentColor ? 'selected' : ''}
+                  style={{ background: item }}
+                  onClick={() => {
+                    this.setState({
+                      currentColor: item
+                    });
+                  }}>
+                  <div style={{ width: '100%' }}>
+                    {index} {item}
+                    <Icon type="delete" theme="twoTone" twoToneColor="#f00"
+                      onClick={() => {
+                        const { currentPalette } = this.state;
+                        _.remove(currentPalette, (color) => {
+                          return color === item;
+                        });
+                        this.setState({
+                          currentPalette
+                        });
+                      }}/>
+                  </div>
+                </List.Item>
+              )}
+            />
+          </div>
+        </Sider>
+        {/* main content */}
+        <Layout style={{ marginLeft: 300 }}>
+          <Menu
+            onClick={(e) => {
+              this.setState({
+                currentTab: e.key
+              });
+            }}
+            selectedKeys={[this.state.currentTab]}
+            mode="horizontal">
+            <Menu.Item key="VisInColorSpace"> Vis in Color Space </Menu.Item>
+            <Menu.Item key="DistanceMatrix"> Distance Matrix </Menu.Item>
+            <Menu.Item key="GradientPaletteBy1"> Gradient Palette by 1 </Menu.Item>
+            <Menu.Item key="GradientPaletteBy2" disabled> Gradient Palette by 2 </Menu.Item>
+            <Menu.Item key="VisInCharts" disabled> Vis in Charts </Menu.Item>
+          </Menu>
+          <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
+            <div style={{ padding: 24, background: '#fff', textAlign: 'center' }} key={this.state.currentTab}>
+              {
+                this.state.currentTab === 'VisInColorSpace' && (
+                  <VisInColorSpace colors={this.state.currentPalette}/>
+                )
+              }
+              {
+                this.state.currentTab === 'DistanceMatrix' && (
+                  <DistanceMatrix colors={this.state.currentPalette}/>
+                )
+              }
+              {
+                this.state.currentTab === 'GradientPaletteBy1' && (
+                  <GradientPaletteBy1 color={this.state.currentColor} colors={this.state.currentPalette}
+                    onPaletteSelect={(p) => {
+                      this.setState({
+                        currentPalette: p,
+                      });
+                    }}/>
+                )
+              }
+              {
+                this.state.currentTab === 'GradientPaletteBy2' && (
+                  <GradientPaletteBy2 color1={this.state.currentColor} color2={this.state.currentColor}/>
+                )
+              }
+              {
+                this.state.currentTab === 'VisInCharts' && (
+                  <VisInCharts colors={this.state.currentPalette}/>
+                )
+              }
+            </div>
+          </Content>
+          <Footer style={{ textAlign: 'center' }}>
+            Palettes, View & Make
+          </Footer>
+        </Layout>
+        {/* Drawer for preset palettes */}
+        <Drawer title="Preset Palettes" placement="left" closable={true} width={480}
+          visible={this.state.showPresetPalettes}
+          onClose={() => {
+            this.setState({ showPresetPalettes: false });
+          }}>
+          <PresetPalettes
+            onSelect={(palette) => {
+              this.setState({
+                currentPalette: palette.colors.concat(),
+                showPresetPalettes: false,
+              });
+            }}/>
+        </Drawer>
+      </Layout>
+    );
+  }
 }
-draw3dScatter();
-$('input[name=color-space]').click(function() {
-    const newColorSpace = $(this).val();
-    if (colorSpace !== newColorSpace) {
-        colorSpace = newColorSpace;
-        draw3dScatter();
-    }
-});
-$dotSize.on('input', () => {
-    Plotly.restyle('3d-scatter', {
-        'marker.size': $dotSize.val(),
-    });
-});
+
+ReactDOM.render(<App />, document.getElementById('root'));

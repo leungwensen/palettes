@@ -18,7 +18,16 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env']
+            presets: [
+              '@babel/preset-env',
+              '@babel/preset-flow',
+              '@babel/preset-react'
+            ],
+            plugins: [
+              '@babel/plugin-proposal-class-properties',
+              '@babel/plugin-syntax-dynamic-import',
+            ],
+            ignore: ['node_modules', 'build'],
           }
         }
       },
@@ -34,11 +43,5 @@ module.exports = {
     publicPath: '/assets/'
   },
   externals: {
-    'chroma-js': 'chroma',
-    'dat.gui': 'dat',
-    'plotly.js': 'Plotly',
-    'vanilla-picker': 'Picker',
-    jquery: 'jQuery',
-    lodash: '_',
   }
 };

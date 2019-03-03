@@ -5,51 +5,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="./assets/bootstrap-4.3.1/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="./assets/dat.gui-0.6.5/build/dat.gui.css">
+  <link rel="stylesheet" href="./assets/react-resizable-1.7.5/css/style.css">
+  <link rel="stylesheet" href="./assets/react-grid-layout-0.16.6/css/style.css">
   <title>Palettes, view & make</title>
 </head>
 
 <body>
-  <header class="container">
-    <div class="jumbotron doc-header">
-      <h1>Palettes</h1>
-      <p class="lead">Color Palettes, view & make</p>
-    </div>
-  </header>
-  <div class="container" id="preset-palettes">
-    <div class="jumbotron">
-      <h2>preset palettes</h2>
-      <div class="accordion" id="palettes-container">
-      </div>
-    </div>
-  </div>
-  <div class="container">
-    <div class="jumbotron">
-      <h2>color picker</h2>
-      <div id="color-picker-container"></div>
-    </div>
-  </div>
-  <div class="container">
-    <div class="jumbotron">
-      <h2>palette 3D view</h2>
-      <p>
-        <label><input type="radio" name="color-space" value="rgb" checked>RGB</label>
-        <label><input type="radio" name="color-space" value="hsv">HSV</label>
-        <label><input type="radio" name="color-space" value="hsl">HSL</label>
-        <label><input type="radio" name="color-space" value="lab">LAB</label>
-        <label><input type="range" min="1" max="20" value="5" class="slider" id="3d-scatter-dot-size">Dot size</label>
-      </p>
-      <div id="3d-scatter" style="width: 100%; height: 800px;"></div>
-    </div>
-  </div>
-  <script src="./assets/lodash-4.17.11/dist/lodash.min.js"></script>
-  <script src="./assets/chroma.js-2.0.3/chroma.min.js"></script>
-  <script src="./assets/jquery-3.3.1/dist/jquery.min.js"></script>
-  <script src="./assets/bootstrap-4.3.1/dist/js/bootstrap.min.js"></script>
-  <script src="./assets/dat.gui-0.6.5/build/dat.gui.min.js"></script>
-  <script src="./assets/plotly.js-1.45.0/dist/plotly.min.js"></script>
-  <script src="./assets/vanilla-picker-2.7.2/dist/vanilla-picker.min.js"></script>
+  <div id="root"></div>
   <script src="./assets/bundle.js"></script>
 </body>
 

@@ -88,7 +88,8 @@ class DistanceMatrix extends React.Component {
             <table>
               <tbody className="ant-table-tbody">
                 {matrix.map((row, i) => <tr key={i}>
-                  {row.map((cell, j) => <td key={j} style={{ background: cell.background, textAlign: 'right' }}>
+                  {row.map((cell, j) => <td key={j}
+                    style={{ background: cell.background, textAlign: 'right', border: '1px solid white' }}>
                     {cell.content}
                   </td>)}
                 </tr>)}

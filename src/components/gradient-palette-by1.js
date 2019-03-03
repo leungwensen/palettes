@@ -120,7 +120,7 @@ class GradientPaletteBy1 extends React.Component {
                       onPaletteSelect(paletteByOne);
                     }}/>
                   </td>
-                  {paletteByOne.map((c, i) => <td key={`${i}-${c}`} style={{ background: c, border: '1px solid #bbb' }}>
+                  {paletteByOne.map((c, i) => <td key={`${i}-${c}`} style={{ background: c, border: '2px solid white' }}>
                     &nbsp;
                   </td>)}
                 </tr>
@@ -143,7 +143,7 @@ class GradientPaletteBy1 extends React.Component {
                         onPaletteSelect(p);
                       }}/>
                     </td>
-                    {p.map((c, i) => <td key={`${i}-${c}`} style={{ background: c, border: '1px solid #bbb' }}>
+                    {p.map((c, i) => <td key={`${i}-${c}`} style={{ background: c, border: '2px solid white' }}>
                       &nbsp;
                     </td>)}
                   </tr>)

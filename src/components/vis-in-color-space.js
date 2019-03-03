@@ -208,7 +208,7 @@ function draw1dPlot(id, palette, mode, d2) {
 class VisInColorSpace extends React.Component {
   state = {
     mode: 'lab',
-    threeSize: 16,
+    threeSize: 8,
     twoModes: generateTwoModes('lab'),
     twoMode: 'ab',
     oneModes: 'lab'.split(''),
@@ -265,7 +265,7 @@ class VisInColorSpace extends React.Component {
               </Radio.Group>
             </Form.Item>
             <Form.Item label="Scatter Size">
-              <Slider min={5} max={30} defaultValue={12} style={{ width: 120 }}
+              <Slider min={5} max={30} defaultValue={8} style={{ width: 120 }}
                 onChange={(value) => {
                   Plotly.restyle('3d-scatter-plot', {
                     'marker.size': value,

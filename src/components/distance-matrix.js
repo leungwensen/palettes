@@ -18,7 +18,7 @@ function generateDistanceMatrix(colors, mode = 'lab', threshold = 20) {
   for (let i = 0; i < colors.length; i += 1) {
     row0.push({
       header: true,
-      content: colors[i],
+      content: i,
       background: colors[i],
     });
   } // fulfill row0

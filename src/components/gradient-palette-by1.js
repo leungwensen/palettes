@@ -107,7 +107,6 @@ class GradientPaletteBy1 extends React.Component {
             }}/>
         </Form.Item>
       </Form>
-      <h3>Selected Color</h3>
       <div className="ant-table ant-table-small" style={{ marginTop: 24 }}>
         <div className="ant-table-content">
           <div className="ant-table-body" style={{ margin: 0 }}>
@@ -129,7 +128,6 @@ class GradientPaletteBy1 extends React.Component {
           </div>
         </div>
       </div>
-      <h3>Palette Colors</h3>
       <div className="ant-table ant-table-small" style={{ marginTop: 24 }}>
         <div className="ant-table-content">
           <div className="ant-table-body" style={{ margin: 0 }}>

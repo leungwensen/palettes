@@ -62,3 +62,7 @@ typings/
 
 # pkg
 package-lock.json
+
+# dist
+assets/bundle.js
+assets/bundle.js.map

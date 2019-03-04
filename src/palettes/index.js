@@ -5,8 +5,8 @@
  */
 
 module.exports = {
-  CartoColors: require('./carto-colors'),
   CMOcean: require('./cm-ocean'),
+  CartoColors: require('./carto-colors'),
   ColorBrewer2: require('./color-brewer2'),
   CubeHelix: require('./cube-helix'),
   MatPlotLib: require('./mat-plot-lib'),

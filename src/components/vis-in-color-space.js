@@ -1,8 +1,8 @@
-import _ from 'lodash';
-import chroma from 'chroma-js';
+import GridLayout from 'react-grid-layout';
 import Plotly from 'plotly.js';
 import React from 'react';
-import GridLayout from 'react-grid-layout';
+import _ from 'lodash';
+import chroma from 'chroma-js';
 import {
   Form,
   Radio,

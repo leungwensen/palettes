@@ -15,13 +15,13 @@ import {
 import {
   SketchPicker as Picker,
 } from 'react-color';
-import palettes from './palettes';
-import PresetPalettes from './components/preset-palettes';
 import DistanceMatrix from './components/distance-matrix';
 import GradientPaletteBy1 from './components/gradient-palette-by1';
 import GradientPaletteBy2 from './components/gradient-palette-by2';
+import PresetPalettes from './components/preset-palettes';
 import VisInCharts from './components/vis-in-charts';
 import VisInColorSpace from './components/vis-in-color-space';
+import palettes from './palettes';
 
 const {
   Content, Footer, Sider,

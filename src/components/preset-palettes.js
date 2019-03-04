@@ -6,12 +6,11 @@ import {
   some,
 } from 'lodash';
 import {
-  Collapse
+  Collapse,
 } from 'antd'
 import palettes from '../palettes';
 
 const { Panel } = Collapse;
-
 const paletteList = [];
 
 each(palettes, (palette, name) => {

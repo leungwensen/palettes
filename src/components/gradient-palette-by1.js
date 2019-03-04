@@ -1,11 +1,11 @@
-import _ from 'lodash';
 import React from 'react';
+import _ from 'lodash';
 import chroma from 'chroma-js';
 import {
   Form,
+  Icon,
   Radio,
   Slider,
-  Icon,
 } from 'antd'
 
 const RANGE = {

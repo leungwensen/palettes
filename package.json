@@ -30,6 +30,7 @@
     "babel-loader": "^8.0.5",
     "css-loader": "^2.1.0",
     "gh-pages": "^2.0.1",
+    "js-yaml": "^3.12.2",
     "style-loader": "^0.23.1",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3",

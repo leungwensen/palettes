@@ -13,5 +13,6 @@ module.exports = {
   MatPlotLib: require('./mat-plot-lib'),
   MyCarta: require('./my-carta'),
   Tableau: require('./tableau'),
+  Tableau10: require('./tableau10'),
   WesAnderson: require('./wes-anderson'),
 };

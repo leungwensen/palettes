@@ -7,10 +7,11 @@ import {
   Radio,
   Slider,
 } from 'antd'
+import getPaletteByColorRange from '../util/palette-by-range';
 
 const RANGE = {
   lab: {
-    l: [0, 1],
+    l: [25, 100],
     a: [-86.185, 98.254],
     b: [-107.863, 94.482],
   },
@@ -27,7 +28,7 @@ const RANGE = {
   hcl: {
     h: [0, 180],
     c: [0, 1],
-    l: [0, 1],
+    l: [0, 100],
   },
 }
 
@@ -39,15 +40,10 @@ function one2two(color, mode, component) {
   // TODO
   const start = RANGE[mode][component][0];
   const end = RANGE[mode][component][1];
-  const step = (end - start) / 10;
+  const step = (end - start) / 100;
   c1[index] = start + step;
   c2[index] = end - step;
   return [chroma[mode](...c1).hex(), chroma[mode](...c2).hex()];
-}
-
-function getPaletteByColorRange(range, mode, count) {
-  const m = mode === 'rgb' ? 'lrgb' : mode;
-  return chroma.scale(range).mode(m).cache(false).colors(count);
 }
 
 const COLOR_SPACES = [
@@ -55,7 +51,7 @@ const COLOR_SPACES = [
   'hsl',
   'lab',
   'hcl',
-]
+];
 
 class GradientPaletteBy1 extends React.Component {
   state = {
@@ -100,8 +96,8 @@ class GradientPaletteBy1 extends React.Component {
             }
           </Radio.Group>
         </Form.Item>
-        <Form.Item label="Colors Count">
-          <Slider min={2} max={20} value={colorsCount} style={{ width: 120 }}
+        <Form.Item label="Count">
+          <Slider min={2} max={40} value={colorsCount} style={{ width: 120 }}
             onChange={(value) => {
               this.setState({ colorsCount: value })
             }}/>

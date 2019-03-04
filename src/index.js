@@ -146,7 +146,7 @@ class App extends React.Component {
               }
               {
                 this.state.currentTab === 'GradientPaletteBy2' && (
-                  <GradientPaletteBy2 color1={this.state.currentColor} color2={this.state.currentColor}/>
+                  <GradientPaletteBy2 start={this.state.currentColor} end={this.state.currentColor}/>
                 )
               }
               {

@@ -30,10 +30,10 @@ const TWO_D_PLOT_LAYOUT = {
   margin: {
     l: 40,
     r: 30,
-    t: 10,
+    t: 20,
     b: 24,
   },
-  height: 320,
+  height: 310,
 };
 
 function generateTwoModes(mode) {
@@ -66,7 +66,7 @@ function draw3dScatter(id, palette, colorSpace, size) {
   });
   const trace = {
     x, y, z,
-    mode: 'markers',
+    mode: 'lines+markers',
     type: 'scatter3d',
     name: 'Colors',
     marker: {
@@ -78,7 +78,11 @@ function draw3dScatter(id, palette, colorSpace, size) {
         width: 1,
         opacity: 1,
       },
-    }
+    },
+    line: {
+      color: 'rgba(0, 0, 0, 0.1)',
+      size: 2,
+    },
   };
   const data = [trace];
   const layout = {
@@ -88,7 +92,7 @@ function draw3dScatter(id, palette, colorSpace, size) {
         center: { x: 0, y: 0, z: 0 }
       }
     },
-    height: 460,
+    height: 420,
     margin: {
       l: 0,
       r: 0,
@@ -235,19 +239,19 @@ class VisInColorSpace extends React.Component {
     const { twoModes, oneModes, mode, threeSize } = this.state;
     return (
       <GridLayout
-        className="layout"
+        className="vis-in-color-space"
         layout={[
           { i: '3d', x: 0, y: 0, w: 12, h: 4, static: true },
           { i: '2d', x: 0, y: 4, w: 6, h: 3, static: true },
           { i: '1d', x: 6, y: 4, w: 6, h: 3, static: true }
         ]}
-        cols={12} rowHeight={120} width={window.innerWidth - 380}
+        cols={12} rowHeight={100} width={window.innerWidth - 380}
         isResizable={false}
         key={mode}>
         <div key="3d" style={{ border: '1px solid #eee' }}>
           <Form layout="inline">
             <Form.Item label="Mode">
-              <Radio.Group defaultValue={mode} onChange={(e) => {
+              <Radio.Group size="small" defaultValue={mode} onChange={(e) => {
                 const cs = e.target.value;
                 const twoModes = generateTwoModes(cs);
                 const oneModes = cs.split('');
@@ -264,8 +268,8 @@ class VisInColorSpace extends React.Component {
                 }
               </Radio.Group>
             </Form.Item>
-            <Form.Item label="Scatter Size">
-              <Slider min={5} max={30} defaultValue={8} style={{ width: 120 }}
+            <Form.Item label="Size">
+              <Slider min={5} max={30} defaultValue={8} style={{ width: 90 }}
                 onChange={(value) => {
                   Plotly.restyle('3d-scatter-plot', {
                     'marker.size': value,
@@ -278,7 +282,7 @@ class VisInColorSpace extends React.Component {
         <div key="2d" style={{ border: '1px solid #eee' }}>
           <Form layout="inline" key={mode}>
             <Form.Item label="Mode">
-              <Radio.Group defaultValue={twoModes[0]} onChange={(e) => {
+              <Radio.Group size="small" defaultValue={twoModes[0]} onChange={(e) => {
                 this.setState({
                   twoMode: e.target.value,
                 });
@@ -288,8 +292,8 @@ class VisInColorSpace extends React.Component {
                 }
               </Radio.Group>
             </Form.Item>
-            <Form.Item label="Scatter Size">
-              <Slider min={5} max={50} defaultValue={12} style={{ width: 120 }}
+            <Form.Item label="Size">
+              <Slider min={5} max={50} defaultValue={12} style={{ width: 90 }}
                 onChange={(value) => {
                   Plotly.restyle('2d-plot', {
                     'marker.size': value,
@@ -302,7 +306,7 @@ class VisInColorSpace extends React.Component {
         <div key="1d" style={{ border: '1px solid #eee' }}>
           <Form layout="inline" key={mode}>
             <Form.Item label="Mode">
-              <Radio.Group defaultValue={oneModes[0]} onChange={(e) => {
+              <Radio.Group size="small" defaultValue={oneModes[0]} onChange={(e) => {
                 this.setState({
                   oneMode: e.target.value,
                 });
@@ -312,8 +316,8 @@ class VisInColorSpace extends React.Component {
                 }
               </Radio.Group>
             </Form.Item>
-            <Form.Item label="Scatter Size">
-              <Slider min={5} max={50} defaultValue={12} style={{ width: 120 }}
+            <Form.Item label="Size">
+              <Slider min={5} max={50} defaultValue={12} style={{ width: 90 }}
                 onChange={(value) => {
                   Plotly.restyle('1d-plot', {
                     'marker.size': value,

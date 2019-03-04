@@ -45,3 +45,12 @@
 #root tr:hover .anticon-plus-circle {
   opacity: 1;
 }
+
+.vis-in-color-space .ant-form-inline {
+  position: fixed;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  z-index: 2;
+  right: 0px;
+  padding-left: 8px;
+}

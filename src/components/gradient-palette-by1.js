@@ -113,8 +113,8 @@ class GradientPaletteBy1 extends React.Component {
             <table style={{ fontFamily: 'Monospace' }}>
               <tbody className="ant-table-tbody">
                 <tr>
-                  <td key={`0-${color}`} style={{ background: color }}>{colors.length > 10? '##' : '#'} {color}</td>
-                  <td key="0-0">
+                  <td key={`0-${color}`} style={{ background: color, border: '2px solid white' }}>{colors.length > 10? '##' : '#'} {color}</td>
+                  <td key="0-0" style={{ border: '2px solid white' }}>
                     <Icon type="plus-circle" theme="twoTone" twoToneColor="#f00" onClick={() => {
                       onPaletteSelect(paletteByOne);
                     }}/>
@@ -135,8 +135,8 @@ class GradientPaletteBy1 extends React.Component {
               <tbody className="ant-table-tbody">
                 {
                   palettes.map((p, i) => <tr>
-                    <td key={`0-${colors[i]}`} style={{ background: colors[i] }}>{i} {colors[i]}</td>
-                    <td key={`${i}-0`}>
+                    <td key={`0-${colors[i]}`} style={{ background: colors[i], border: '2px solid white' }}>{i} {colors[i]}</td>
+                    <td key={`${i}-0`} style={{ border: '2px solid white' }}>
                       <Icon type="plus-circle" theme="twoTone" twoToneColor="#f00" onClick={() => {
                         onPaletteSelect(p);
                       }}/>

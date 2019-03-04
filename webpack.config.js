@@ -43,5 +43,10 @@ module.exports = {
     publicPath: '/assets/'
   },
   externals: {
-  }
+    'chroma-js': 'chroma',
+    'lodash': '_',
+    'plotly.js': 'Plotly',
+    'react': 'React',
+    'react-dom': 'ReactDOM',
+  },
 };

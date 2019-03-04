@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import chroma from 'chroma-js';
-import Plotly from 'plotly.js/dist/plotly';
+import Plotly from 'plotly.js';
 import React from 'react';
 import GridLayout from 'react-grid-layout';
 import {

@@ -4,6 +4,8 @@ Color Palettes, view & make. https://leungwensen.github.io/palettes/
 
 ## Roadmap
 
+### core features
+
 - [x] palette READ / UPDATE / DELETE
 - [ ] visualization in color space (3D / 2D / 1D)
   - [x] HCL
@@ -35,6 +37,12 @@ Color Palettes, view & make. https://leungwensen.github.io/palettes/
 - [x] generate gradient palette from 1 color
 - [ ] generate gradient palette from 2 colors
 - [ ] show palette in UI components / Charts
+
+### UI / interaction
+
+- [ ] label in color blocks should switch color according to color
+- [ ] palettes COPY / SAVE to cache, etc.
+- [ ] ...
 
 ## Thanks to
 

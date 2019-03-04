@@ -9,6 +9,7 @@ module.exports = {
   CartoColors: require('./carto-colors'),
   ColorBrewer2: require('./color-brewer2'),
   CubeHelix: require('./cube-helix'),
+  KeplerGL: require('./kepler-gl'),
   MatPlotLib: require('./mat-plot-lib'),
   MyCarta: require('./my-carta'),
   Tableau: require('./tableau'),

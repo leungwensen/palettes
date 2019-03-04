@@ -8,6 +8,7 @@ import {
   Radio,
   Slider,
 } from 'antd'
+import { COLOR_RANGE } from '../constants';
 
 const COLOR_SPACES = [
   'lab',
@@ -15,17 +16,6 @@ const COLOR_SPACES = [
   'hsl',
   'hcl',
 ];
-const RANGE = {
-  r: [0, 270],
-  g: [0, 270],
-  b: [0, 270],
-  h: [0, 370],
-  c: [0, 110],
-  l: [0, 110],
-  s: [0, 110],
-  'a*': [-90, 100],
-  'b*': [-110, 100],
-};
 const TWO_D_PLOT_LAYOUT = {
   margin: {
     l: 40,
@@ -102,13 +92,9 @@ function draw3dScatter(id, palette, colorSpace, size) {
     },
   };
   let [d1, d2, d3] = colorSpace.split('');
-  if (colorSpace === 'lab') {
-    d2 = `${d2}*`;
-    d3 = `${d3}*`;
-  }
-  layout.scene.xaxis = { title: _.toUpper(d1), range: RANGE[d1] };
-  layout.scene.yaxis = { title: _.toUpper(d2), range: RANGE[d2] };
-  layout.scene.zaxis = { title: _.toUpper(d3), range: RANGE[d3] };
+  layout.scene.xaxis = { title: _.toUpper(d1), range: COLOR_RANGE[colorSpace][d1] };
+  layout.scene.yaxis = { title: _.toUpper(d2), range: COLOR_RANGE[colorSpace][d2] };
+  layout.scene.zaxis = { title: _.toUpper(d3), range: COLOR_RANGE[colorSpace][d3] };
   Plotly.purge(id);
   Plotly.newPlot(id, data, layout, {
     displayModeBar: false
@@ -143,18 +129,14 @@ function draw2dPlot(id, palette, mode, xy) {
       size: 1,
     },
   };
-  if (mode === 'lab') {
-    if (d1 === 'a' || d1 === 'b') d1 = `${d1}*`;
-    if (d2 === 'a' || d2 === 'b') d2 = `${d2}*`;
-  }
   const layout = {
     xaxis: {
       title: _.toUpper(d1),
-      range: RANGE[d1]
+      range: COLOR_RANGE[mode][d1]
     },
     yaxis: {
       title: _.toUpper(d2),
-      range: RANGE[d2]
+      range: COLOR_RANGE[mode][d2]
     },
     ...TWO_D_PLOT_LAYOUT
   }
@@ -190,16 +172,13 @@ function draw1dPlot(id, palette, mode, d2) {
       size: 1,
     },
   };
-  if (mode === 'lab') {
-    if (d2 === 'a' || d2 === 'b') d2 = `${d2}*`;
-  }
   const layout = {
     xaxis: {
       title: 'index',
     },
     yaxis: {
       title: _.toUpper(d2),
-      range: RANGE[d2]
+      range: COLOR_RANGE[mode][d2]
     },
     ...TWO_D_PLOT_LAYOUT
   }

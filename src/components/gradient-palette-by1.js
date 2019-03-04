@@ -8,29 +8,20 @@ import {
   Slider,
 } from 'antd'
 import getPaletteByColorRange from '../util/palette-by-range';
+import { COLOR_RANGE } from '../constants';
 
-const RANGE = {
+const RANGE = _.merge({}, COLOR_RANGE, {
+  // for interpolate
   lab: {
-    l: [25, 100],
-    a: [-86.185, 98.254],
-    b: [-107.863, 94.482],
-  },
-  rgb: {
-    r: [0, 255],
-    g: [0, 255],
-    b: [0, 255],
+    l: [30, 100],
   },
   hsl: {
     h: [0, 180],
-    s: [0, 1],
-    l: [0, 1],
   },
   hcl: {
     h: [0, 180],
-    c: [0, 1],
-    l: [0, 100],
   },
-}
+});
 
 function one2two(color, mode, component) {
   const components = chroma(color)[mode]();

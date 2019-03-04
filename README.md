@@ -35,6 +35,7 @@ Color Palettes, view & make. https://leungwensen.github.io/palettes/
   - [ ] LCH
   - [ ] TEMP
 - [x] generate gradient palette from 1 color
+- [ ] color blind testing
 - [ ] generate gradient palette from 2 colors
 - [ ] show palette in UI components / Charts
 

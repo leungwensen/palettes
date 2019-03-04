@@ -4,13 +4,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';
 import {
-  Menu,
   Button,
   Divider,
   Drawer,
   Icon,
   Layout,
   List,
+  Menu,
 } from 'antd';
 import {
   SketchPicker as Picker,

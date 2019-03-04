@@ -6,6 +6,7 @@
   "scripts": {
     "build": "webpack",
     "dist": "webpack --config webpack.config.prod.js",
+    "gh-pages": "gh-pages -d assets",
     "start:dev": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

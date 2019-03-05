@@ -27,11 +27,14 @@ const {
   Content, Footer, Sider,
 } = Layout;
 
+// const DEFAULT_PALETTE = palettes.Tableau.Tableau_10;
+const DEFAULT_PALETTE = palettes.AntD3.regular.All_12;
+
 class App extends React.Component {
   state = {
     showPresetPalettes: false,
-    currentPalette: palettes.Tableau.Tableau_10.concat([]),
-    currentColor: palettes.Tableau.Tableau_10[0],
+    currentPalette: DEFAULT_PALETTE.concat([]),
+    currentColor: DEFAULT_PALETTE[0],
     currentTab: 'VisInColorSpace',
     sizeKey: window.innerWidth,
   };

@@ -5,6 +5,7 @@
  */
 
 module.exports = {
+  AntD3: require('./antd3'),
   CMOcean: require('./cm-ocean'),
   CartoColors: require('./carto-colors'),
   ColorBrewer2: require('./color-brewer2'),

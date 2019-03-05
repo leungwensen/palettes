@@ -12,8 +12,15 @@ import {
 import {
   SketchPicker as Picker,
 } from 'react-color';
-import paletteByColorRange from '../util/palette-by-range';
 import randomColor from '../util/random-color';
+
+function getPaletteByColorRange(range, mode, count, bezier) {
+  return chroma.scale(range)
+    // .correctLightness()
+    .mode(mode)
+    .cache(false)
+    .colors(count);
+}
 
 const MODES = [
   'rgb',
@@ -21,6 +28,7 @@ const MODES = [
   'lab',
   'hsl',
   'hcl',
+  'hsv',
 ];
 
 const RANGE = [];
@@ -29,7 +37,7 @@ for (let i = 0; i < MAX_PALETTE_SIZE; i += 1) {
   RANGE.push(randomColor());
 }
 
-class GradientPaletteBy2 extends React.Component {
+class GradientPaletteByMany extends React.Component {
   state = {
     mode: MODES[3],
     minCount: 2,
@@ -143,4 +151,4 @@ class GradientPaletteBy2 extends React.Component {
   }
 }
 
-export default GradientPaletteBy2;
+export default GradientPaletteByMany;

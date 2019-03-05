@@ -7,41 +7,53 @@ import {
   Radio,
   Slider,
 } from 'antd'
-import getPaletteByColorRange from '../util/palette-by-range';
+import getAntD3Palette from '../util/antd3-palette';
 
-function one2range(color, mode) {
-  const origin = chroma(color);
-  const darker = origin.darken(1);
-  const lighter = origin.brighten(0.75);
-  const components = chroma(color)[mode]();
+function getPaletteByColor(color, mode, count) {
   const white = chroma('white');
-  const whiteComponents = white[mode]();
-  return [darker.hex(), origin.hex(), lighter.hex(), white.hex()];
+  const origin = chroma(color);
+
+  if (mode === 'lab') {
+    const range = [
+      origin.darken(1),
+      origin,
+      origin.brighten(1),
+      white,
+    ];
+    return chroma.scale(range)
+      // .correctLightness()
+      .mode(mode)
+      .cache(false)
+      .colors(count);
+  }
+  if (mode === 'antd3') {
+    return getAntD3Palette(color);
+  }
 }
 
 const COLOR_SPACES = [
-  'rgb',
-  'hsl',
   'lab',
-  'hcl',
-  'hsv',
+  'antd3',
 ];
 
 class GradientPaletteBy1 extends React.Component {
   state = {
-    mode: 'hsl',
+    mode: 'lab',
     colorsCount: 10,
   }
 
   render() {
     const { color, colors } = this.props;
     const onPaletteSelect = this.props.onPaletteSelect || function() {};
-    const { mode, currentComponent, colorsCount } = this.state;
+    let { mode, currentComponent, colorsCount } = this.state;
+    if (mode === 'antd3') {
+      colorsCount = 10;
+    }
     const components = mode.split('');
-    const paletteByOne = getPaletteByColorRange(one2range(color, mode), mode, colorsCount);
+    const paletteByOne = getPaletteByColor(color, mode, colorsCount);
     const palettes = [];
     colors.map(c => {
-      palettes.push(getPaletteByColorRange(one2range(c, mode), mode, colorsCount));
+      palettes.push(getPaletteByColor(c, mode, colorsCount));
     });
     return <div>
       <Form layout="inline">
@@ -58,12 +70,14 @@ class GradientPaletteBy1 extends React.Component {
             }
           </Radio.Group>
         </Form.Item>
-        <Form.Item label="Count">
-          <Slider min={2} max={40} value={colorsCount} style={{ width: 120 }}
-            onChange={(value) => {
-              this.setState({ colorsCount: value })
-            }}/>
-        </Form.Item>
+        {
+          mode === 'antd3' ? '' : <Form.Item label="Count">
+            <Slider min={2} max={40} value={colorsCount} style={{ width: 120 }}
+              onChange={(value) => {
+                this.setState({ colorsCount: value })
+              }}/>
+          </Form.Item>
+        }
       </Form>
       <div className="ant-table ant-table-small" style={{ marginTop: 24 }}>
         <div className="ant-table-content">

@@ -17,7 +17,7 @@ import {
 } from 'react-color';
 import DistanceMatrix from './components/distance-matrix';
 import GradientPaletteBy1 from './components/gradient-palette-by1';
-import GradientPaletteBy2 from './components/gradient-palette-by2';
+import GradientPaletteByMany from './components/gradient-palette-by-many';
 import PresetPalettes from './components/preset-palettes';
 import VisInCharts from './components/vis-in-charts';
 import VisInColorSpace from './components/vis-in-color-space';
@@ -75,7 +75,11 @@ class App extends React.Component {
                     currentColor: color.hex
                   });
                 }}/>
-              <p><Button block onClick={this.addToPalette}>add to palette</Button></p>
+              <p>
+                <Button block onClick={this.addToPalette}>
+                add to palette <Icon type="plus"></Icon>
+                </Button>
+              </p>
             </div>
             <Divider/>
             <List size="small"
@@ -119,7 +123,7 @@ class App extends React.Component {
             <Menu.Item key="VisInColorSpace"> Vis in Color Space </Menu.Item>
             <Menu.Item key="DistanceMatrix"> Distance Matrix </Menu.Item>
             <Menu.Item key="GradientPaletteBy1"> Gradient Palette by 1 </Menu.Item>
-            <Menu.Item key="GradientPaletteBy2" disabled> Gradient Palette by 2 </Menu.Item>
+            <Menu.Item key="GradientPaletteByMany"> Gradient Palette by Many </Menu.Item>
             <Menu.Item key="VisInCharts" disabled> Vis in Charts </Menu.Item>
           </Menu>
           <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
@@ -145,8 +149,13 @@ class App extends React.Component {
                 )
               }
               {
-                this.state.currentTab === 'GradientPaletteBy2' && (
-                  <GradientPaletteBy2 start={this.state.currentColor} end={this.state.currentColor}/>
+                this.state.currentTab === 'GradientPaletteByMany' && (
+                  <GradientPaletteByMany color={this.state.currentColor} colors={this.state.currentPalette}
+                    setPalette={(p) => {
+                      this.setState({
+                        currentPalette: p,
+                      });
+                    }}/>
                 )
               }
               {

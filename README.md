@@ -12,9 +12,9 @@ Color Palettes, view & make. https://leungwensen.github.io/palettes/
   - [x] HSL
   - [x] LAB
   - [x] RGB
-  - [ ] CMYK
-  - [ ] HSV
+  - [x] HSV
   - [ ] LCH
+  - ~~[ ] CMYK~~
   - [ ] TEMP
 - [x] preset palettes (~1k palettes available)
   - [x] CMOcean
@@ -41,6 +41,7 @@ Color Palettes, view & make. https://leungwensen.github.io/palettes/
 
 ### UI / interaction
 
+- [ ] load palette from image
 - [ ] label in color blocks should switch color according to color
 - [ ] palettes COPY / SAVE to cache, etc.
 - [ ] current palette save to localStorage

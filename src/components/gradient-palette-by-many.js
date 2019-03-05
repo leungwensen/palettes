@@ -14,7 +14,7 @@ import {
 } from 'react-color';
 import randomColor from '../util/random-color';
 
-function getPaletteByColorRange(range, mode, count, bezier) {
+function paletteByColorRange(range, mode, count, bezier) {
   return chroma.scale(range)
     // .correctLightness()
     .mode(mode)

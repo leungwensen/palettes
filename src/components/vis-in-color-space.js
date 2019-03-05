@@ -15,6 +15,7 @@ const COLOR_SPACES = [
   'rgb',
   'hsl',
   'hcl',
+  'hsv',
 ];
 const TWO_D_PLOT_LAYOUT = {
   margin: {

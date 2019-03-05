@@ -8,29 +8,15 @@ import {
   Slider,
 } from 'antd'
 import getPaletteByColorRange from '../util/palette-by-range';
-import { COLOR_RANGE } from '../constants';
 
-const RANGE = _.merge({}, COLOR_RANGE, {
-  // for interpolate
-  lab: {
-    l: [30, 100],
-  },
-  hsl: {
-    h: [0, 180],
-  },
-  hcl: {
-    h: [0, 180],
-  },
-});
-
-function one2range(color, mode, component) {
+function one2range(color, mode) {
   const origin = chroma(color);
   const darker = origin.darken(1);
-  const lighter = origin.brighten();
+  const lighter = origin.brighten(0.75);
   const components = chroma(color)[mode]();
   const white = chroma('white');
   const whiteComponents = white[mode]();
-  return [darker.hex(), origin.hex(), white.hex()];
+  return [darker.hex(), origin.hex(), lighter.hex(), white.hex()];
 }
 
 const COLOR_SPACES = [
@@ -44,7 +30,6 @@ const COLOR_SPACES = [
 class GradientPaletteBy1 extends React.Component {
   state = {
     mode: 'hsl',
-    currentComponent: 'l',
     colorsCount: 10,
   }
 
@@ -53,10 +38,10 @@ class GradientPaletteBy1 extends React.Component {
     const onPaletteSelect = this.props.onPaletteSelect || function() {};
     const { mode, currentComponent, colorsCount } = this.state;
     const components = mode.split('');
-    const paletteByOne = getPaletteByColorRange(one2range(color, mode, currentComponent), mode, colorsCount);
+    const paletteByOne = getPaletteByColorRange(one2range(color, mode), mode, colorsCount);
     const palettes = [];
     colors.map(c => {
-      palettes.push(getPaletteByColorRange(one2range(c, mode, currentComponent), mode, colorsCount));
+      palettes.push(getPaletteByColorRange(one2range(c, mode), mode, colorsCount));
     });
     return <div>
       <Form layout="inline">
@@ -70,17 +55,6 @@ class GradientPaletteBy1 extends React.Component {
           }}>
             {
               COLOR_SPACES.map((cs, i) => <Radio.Button key={i} value={cs}>{_.toUpper(cs)}</Radio.Button>)
-            }
-          </Radio.Group>
-        </Form.Item>
-        <Form.Item label="Scale by">
-          <Radio.Group key={currentComponent} defaultValue={currentComponent} onChange={(e) => {
-            this.setState({
-              currentComponent: e.target.value,
-            })
-          }}>
-            {
-              components.map((c, i) => <Radio.Button key={i} value={c}>{_.toUpper(c)}</Radio.Button>)
             }
           </Radio.Group>
         </Form.Item>

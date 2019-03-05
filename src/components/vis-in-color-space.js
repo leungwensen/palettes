@@ -230,7 +230,7 @@ class VisInColorSpace extends React.Component {
         key={mode}>
         <div key="3d" style={{ border: '1px solid #eee' }}>
           <Form layout="inline">
-            <Form.Item label="Mode">
+            <Form.Item label="XYZ">
               <Radio.Group size="small" defaultValue={mode} onChange={(e) => {
                 const cs = e.target.value;
                 const twoModes = generateTwoModes(cs);
@@ -261,7 +261,7 @@ class VisInColorSpace extends React.Component {
         </div>
         <div key="2d" style={{ border: '1px solid #eee' }}>
           <Form layout="inline" key={mode}>
-            <Form.Item label="Mode">
+            <Form.Item label="XY">
               <Radio.Group size="small" defaultValue={twoModes[0]} onChange={(e) => {
                 this.setState({
                   twoMode: e.target.value,
@@ -285,7 +285,7 @@ class VisInColorSpace extends React.Component {
         </div>
         <div key="1d" style={{ border: '1px solid #eee' }}>
           <Form layout="inline" key={mode}>
-            <Form.Item label="Mode">
+            <Form.Item label="Y">
               <Radio.Group size="small" defaultValue={oneModes[0]} onChange={(e) => {
                 this.setState({
                   oneMode: e.target.value,

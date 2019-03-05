@@ -31,7 +31,7 @@ for (let i = 0; i < MAX_PALETTE_SIZE; i += 1) {
 
 class GradientPaletteBy2 extends React.Component {
   state = {
-    mode: MODES[0],
+    mode: MODES[3],
     minCount: 2,
     maxCount: 5,
     count: 2,

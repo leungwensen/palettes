@@ -23,18 +23,14 @@ const RANGE = _.merge({}, COLOR_RANGE, {
   },
 });
 
-function one2two(color, mode, component) {
+function one2range(color, mode, component) {
+  const origin = chroma(color);
+  const darker = origin.darken(1);
+  const lighter = origin.brighten();
   const components = chroma(color)[mode]();
-  const index = mode.indexOf(component);
-  const c1 = components.concat([]);
-  const c2 = components.concat([]);
-  // TODO
-  const start = RANGE[mode][component][0];
-  const end = RANGE[mode][component][1];
-  const step = (end - start) / 100;
-  c1[index] = start + step;
-  c2[index] = end - step;
-  return [chroma[mode](...c1).hex(), chroma[mode](...c2).hex()];
+  const white = chroma('white');
+  const whiteComponents = white[mode]();
+  return [darker.hex(), origin.hex(), white.hex()];
 }
 
 const COLOR_SPACES = [
@@ -42,6 +38,7 @@ const COLOR_SPACES = [
   'hsl',
   'lab',
   'hcl',
+  'hsv',
 ];
 
 class GradientPaletteBy1 extends React.Component {
@@ -56,10 +53,10 @@ class GradientPaletteBy1 extends React.Component {
     const onPaletteSelect = this.props.onPaletteSelect || function() {};
     const { mode, currentComponent, colorsCount } = this.state;
     const components = mode.split('');
-    const paletteByOne = getPaletteByColorRange(one2two(color, mode, currentComponent), mode, colorsCount);
+    const paletteByOne = getPaletteByColorRange(one2range(color, mode, currentComponent), mode, colorsCount);
     const palettes = [];
     colors.map(c => {
-      palettes.push(getPaletteByColorRange(one2two(c, mode, currentComponent), mode, colorsCount));
+      palettes.push(getPaletteByColorRange(one2range(c, mode, currentComponent), mode, colorsCount));
     });
     return <div>
       <Form layout="inline">

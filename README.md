@@ -35,14 +35,15 @@ Color Palettes, view & make. https://leungwensen.github.io/palettes/
   - [ ] LCH
   - [ ] TEMP
 - [x] generate gradient palette from 1 color
+- [x] generate gradient palette from multiple colors
 - [ ] color blind testing
-- [ ] generate gradient palette from 2 colors
 - [ ] show palette in UI components / Charts
 
 ### UI / interaction
 
 - [ ] label in color blocks should switch color according to color
 - [ ] palettes COPY / SAVE to cache, etc.
+- [ ] current palette save to localStorage
 - [ ] ...
 
 ## Thanks to

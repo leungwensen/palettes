@@ -42,9 +42,9 @@ Color Palettes, view & make. https://leungwensen.github.io/palettes/
 ### UI / interaction
 
 - [x] copy color to clipboard
+- [x] palettes LOAD / SAVE to localStorage, etc.
 - [ ] load palette from image
 - [ ] label in color blocks should switch color according to color
-- [ ] palettes COPY / SAVE to cache, etc.
 - [ ] current palette save to localStorage
 - [ ] ...
 

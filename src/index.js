@@ -32,13 +32,22 @@ const {
 const DEFAULT_PALETTE = palettes.AntD3.regular.All_12;
 
 class App extends React.Component {
-  state = {
-    showPresetPalettes: false,
-    currentPalette: DEFAULT_PALETTE.concat([]),
-    currentColor: DEFAULT_PALETTE[0],
-    currentTab: 'VisInColorSpace',
-    windowSize: window.innerWidth,
-  };
+  constructor(props) {
+    super(props);
+
+    const color = localStorage.getItem('currentColor') || DEFAULT_PALETTE[0];
+    const cachedPalette = localStorage.getItem('currentPalette');
+    const palette = cachedPalette ? JSON.parse(cachedPalette) : DEFAULT_PALETTE.concat([]);
+    const tab = localStorage.getItem('currentTab') || 'VisInColorSpace';
+
+    this.state = {
+      currentPalette: palette,
+      currentColor: color,
+      currentTab: tab,
+      showPresetPalettes: false,
+      windowSize: window.innerWidth,
+    };
+  }
 
   addToPalette = () => {
     const { currentColor, currentPalette } = this.state;
@@ -48,6 +57,21 @@ class App extends React.Component {
         currentPalette,
       });
     }
+  }
+
+  syncCache = () => {
+    requestAnimationFrame(() => {
+      localStorage.setItem('currentColor', this.state.currentColor);
+      localStorage.setItem('currentPalette', JSON.stringify(this.state.currentPalette));
+      localStorage.setItem('currentTab', this.state.currentTab);
+    });
+  }
+
+  componentDidMount() {
+    this.syncCache();
+  }
+  componentDidUpdate() {
+    this.syncCache();
   }
 
   render() {

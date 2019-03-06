@@ -82,7 +82,7 @@ class App extends React.Component {
               <Icon type="right" />
             </Button>
             <div className="color-picker-container">
-              <Picker width={260} color={currentColor} presetColors={[]}
+              <Picker width={250} color={currentColor} presetColors={[]}
                 onChange={(color) => {
                   this.setState({
                     currentColor: color.hex

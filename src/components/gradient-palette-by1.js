@@ -8,11 +8,11 @@ import {
   Slider,
 } from 'antd'
 import getAntD3Palette from '../util/antd3-palette';
+import ColorBlock from './color-block';
 
 function getPaletteByColor(color, mode, count) {
   const white = chroma('white');
   const origin = chroma(color);
-
   if (mode === 'lab') {
     const range = [
       origin.darken(1),
@@ -85,15 +85,25 @@ class GradientPaletteBy1 extends React.Component {
             <table style={{ fontFamily: 'Monospace' }}>
               <tbody className="ant-table-tbody">
                 <tr>
-                  <td key={`0-${color}`} style={{ background: color, border: '2px solid white' }}>{colors.length > 10? '##' : '#'} {color}</td>
-                  <td key="0-0" style={{ border: '2px solid white' }}>
+                  <td key={`0-${color}`}>
+                    <ColorBlock
+                      index={colors.length > 10? '##' : '#'}
+                      color={color}
+                      showColor={true}
+                      showIndex={true}/>
+                  </td>
+                  <td key="0-0" style={{ textAlign: 'center' }}>
                     <Icon type="plus-circle" theme="twoTone" twoToneColor="#f00" onClick={() => {
                       onPaletteSelect(paletteByOne);
                     }}/>
                   </td>
-                  {paletteByOne.map((c, i) => <td key={`${i}-${c}`} style={{ background: c, border: '2px solid white' }}>
-                    &nbsp;
-                  </td>)}
+                  {
+                    paletteByOne.map((c, i) => (
+                      <td key={`${i}-${c}`}>
+                        <ColorBlock color={c}/>
+                      </td>
+                    ))
+                  }
                 </tr>
               </tbody>
             </table>
@@ -107,14 +117,20 @@ class GradientPaletteBy1 extends React.Component {
               <tbody className="ant-table-tbody">
                 {
                   palettes.map((p, i) => <tr>
-                    <td key={`0-${colors[i]}`} style={{ background: colors[i], border: '2px solid white' }}>{i} {colors[i]}</td>
-                    <td key={`${i}-0`} style={{ border: '2px solid white' }}>
+                    <td key={`0-${colors[i]}`}>
+                    <ColorBlock
+                      index={i}
+                      color={colors[i]}
+                      showColor={true}
+                      showIndex={true}/>
+                    </td>
+                    <td key={`${i}-0`} style={{ textAlign: 'center' }}>
                       <Icon type="plus-circle" theme="twoTone" twoToneColor="#f00" onClick={() => {
                         onPaletteSelect(p);
                       }}/>
                     </td>
-                    {p.map((c, i) => <td key={`${i}-${c}`} style={{ background: c, border: '2px solid white' }}>
-                      &nbsp;
+                    {p.map((c, i) => <td key={`${i}-${c}`}>
+                      <ColorBlock color={c}/>
                     </td>)}
                   </tr>)
                 }

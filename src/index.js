@@ -1,5 +1,5 @@
 import 'antd/dist/antd.css';
-import './css/index.css';
+import './css/index.less';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';
@@ -15,6 +15,7 @@ import {
 import {
   SketchPicker as Picker,
 } from 'react-color';
+import ColorBlock from './components/color-block';
 import DistanceMatrix from './components/distance-matrix';
 import GradientPaletteBy1 from './components/gradient-palette-by1';
 import GradientPaletteByMany from './components/gradient-palette-by-many';
@@ -36,7 +37,7 @@ class App extends React.Component {
     currentPalette: DEFAULT_PALETTE.concat([]),
     currentColor: DEFAULT_PALETTE[0],
     currentTab: 'VisInColorSpace',
-    sizeKey: window.innerWidth,
+    windowSize: window.innerWidth,
   };
 
   addToPalette = () => {
@@ -55,8 +56,15 @@ class App extends React.Component {
         sizeKey: window.innerWidth,
       });
     }
+    const {
+      currentColor,
+      currentPalette,
+      currentTab,
+      showPresetPalettes,
+      windowSize,
+    } = this.state;
     return (
-      <Layout key={this.state.sizeKey}>
+      <Layout key={windowSize}>
         {/* sider */}
         <Sider width={300}
           style={{
@@ -66,13 +74,15 @@ class App extends React.Component {
           <div
             style={{ padding: '8px' }}>
             <Button type="primary" onClick={() => {
-              this.setState({ showPresetPalettes: true });
+              this.setState({
+                showPresetPalettes: true,
+              });
             }}>
               preset palettes
               <Icon type="right" />
             </Button>
             <div className="color-picker-container">
-              <Picker width={260} color={this.state.currentColor} presetColors={[]}
+              <Picker width={260} color={currentColor} presetColors={[]}
                 onChange={(color) => {
                   this.setState({
                     currentColor: color.hex
@@ -80,37 +90,35 @@ class App extends React.Component {
                 }}/>
               <p>
                 <Button block onClick={this.addToPalette}>
-                add to palette <Icon type="plus"></Icon>
+                  add to palette <Icon type="plus"></Icon>
                 </Button>
               </p>
             </div>
             <Divider/>
-            <List size="small"
-              dataSource={this.state.currentPalette}
-              renderItem={(item, index) => (
-                <List.Item className={item === this.state.currentColor ? 'selected' : ''}
-                  style={{ background: item }}
-                  onClick={() => {
-                    this.setState({
-                      currentColor: item
+            {
+              currentPalette.map((color, index) => (
+                <ColorBlock
+                  selected={color === currentColor}
+                  color={color}
+                  index={index}
+                  showColor={true}
+                  showDeleteIcon={true}
+                  showIndex={true}
+                  onDelete={(item) => {
+                     _.remove(currentPalette, (c) => {
+                      return c === item;
                     });
-                  }}>
-                  <div style={{ width: '100%' }}>
-                    {index} {item}
-                    <Icon type="delete" theme="twoTone" twoToneColor="#f00"
-                      onClick={() => {
-                        const { currentPalette } = this.state;
-                        _.remove(currentPalette, (color) => {
-                          return color === item;
-                        });
-                        this.setState({
-                          currentPalette
-                        });
-                      }}/>
-                  </div>
-                </List.Item>
-              )}
-            />
+                    this.setState({
+                      currentPalette,
+                    });
+                  }}
+                  onSelected={(c) => {
+                    this.setState({
+                      currentColor: c,
+                    });
+                  }}/>
+              ))
+            }
           </div>
         </Sider>
         {/* main content */}
@@ -118,10 +126,10 @@ class App extends React.Component {
           <Menu
             onClick={(e) => {
               this.setState({
-                currentTab: e.key
+                currentTab: e.key,
               });
             }}
-            selectedKeys={[this.state.currentTab]}
+            selectedKeys={[currentTab]}
             mode="horizontal">
             <Menu.Item key="VisInColorSpace"> Vis in Color Space </Menu.Item>
             <Menu.Item key="DistanceMatrix"> Distance Matrix </Menu.Item>
@@ -130,20 +138,22 @@ class App extends React.Component {
             <Menu.Item key="VisInCharts" disabled> Vis in Charts </Menu.Item>
           </Menu>
           <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
-            <div style={{ padding: 24, background: '#fff', textAlign: 'center' }} key={this.state.currentTab}>
+            <div
+              style={{ padding: 24, background: '#fff', textAlign: 'center' }}
+              key={this.state.currentTab}>
               {
-                this.state.currentTab === 'VisInColorSpace' && (
-                  <VisInColorSpace colors={this.state.currentPalette}/>
+                currentTab === 'VisInColorSpace' && (
+                  <VisInColorSpace colors={currentPalette}/>
                 )
               }
               {
-                this.state.currentTab === 'DistanceMatrix' && (
-                  <DistanceMatrix colors={this.state.currentPalette}/>
+                currentTab === 'DistanceMatrix' && (
+                  <DistanceMatrix colors={currentPalette}/>
                 )
               }
               {
-                this.state.currentTab === 'GradientPaletteBy1' && (
-                  <GradientPaletteBy1 color={this.state.currentColor} colors={this.state.currentPalette}
+                currentTab === 'GradientPaletteBy1' && (
+                  <GradientPaletteBy1 color={currentColor} colors={currentPalette}
                     onPaletteSelect={(p) => {
                       this.setState({
                         currentPalette: p,
@@ -152,8 +162,8 @@ class App extends React.Component {
                 )
               }
               {
-                this.state.currentTab === 'GradientPaletteByMany' && (
-                  <GradientPaletteByMany color={this.state.currentColor} colors={this.state.currentPalette}
+                currentTab === 'GradientPaletteByMany' && (
+                  <GradientPaletteByMany color={currentColor} colors={currentPalette}
                     setPalette={(p) => {
                       this.setState({
                         currentPalette: p,
@@ -162,8 +172,8 @@ class App extends React.Component {
                 )
               }
               {
-                this.state.currentTab === 'VisInCharts' && (
-                  <VisInCharts colors={this.state.currentPalette}/>
+                currentTab === 'VisInCharts' && (
+                  <VisInCharts colors={currentPalette}/>
                 )
               }
             </div>
@@ -174,7 +184,7 @@ class App extends React.Component {
         </Layout>
         {/* Drawer for preset palettes */}
         <Drawer title="Preset Palettes" placement="left" closable={true} width={480}
-          visible={this.state.showPresetPalettes}
+          visible={showPresetPalettes}
           onClose={() => {
             this.setState({ showPresetPalettes: false });
           }}>

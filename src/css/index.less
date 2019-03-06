@@ -1,0 +1,75 @@
+
+#root {
+  .color-picker-container .sketch-picker {
+    box-shadow: none!important;
+  }
+
+  tr {
+    .anticon-plus-circle {
+      text-align: center;
+      font-size: 20px; 
+      opacity: 0;
+    }
+    &:hover .anticon-plus-circle {
+      opacity: 1;
+    }
+  }
+  td {
+    padding: 0;
+  }
+
+  .vis-in-color-space .ant-form-inline {
+    position: fixed;
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    right: 0px;
+    padding-left: 8px;
+  }
+
+  .sketch-picker {
+    margin: 0 auto;
+  }
+
+  .color-block {
+    display: inline-block;
+    width: 100%;
+    word-break: break-all;
+    white-space: nowrap;
+    cursor: pointer;
+    position: relative;
+    flex: 1;
+    height: 42px;
+    padding: 8px;
+    margin-right: 0;
+    border-radius: 0;
+    border: 2px solid #fff;
+    &:hover {
+      border: 2px dashed #000;
+    }
+    &.selected {
+      border: 2px solid #000;
+    }
+    &:hover, &.selected {
+      .anticon-delete {
+        opacity: 1;
+      }
+    }
+    .anticon-delete {
+      float: right;
+      font-size: 20px; 
+      opacity: 0;
+    }
+    .index-text {
+      display: inline-block;
+      width: 2em;
+    }
+  }
+}
+
+.preset-palette-colors:hover {
+  border: 2px solid black!important;
+  cursor: pointer;
+}
+
+

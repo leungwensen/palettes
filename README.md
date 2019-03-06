@@ -41,6 +41,7 @@ Color Palettes, view & make. https://leungwensen.github.io/palettes/
 
 ### UI / interaction
 
+- [x] copy color to clipboard
 - [ ] load palette from image
 - [ ] label in color blocks should switch color according to color
 - [ ] palettes COPY / SAVE to cache, etc.

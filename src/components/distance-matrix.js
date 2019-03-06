@@ -6,6 +6,7 @@ import {
   Radio,
   Slider,
 } from 'antd'
+import ColorBlock from './color-block';
 
 function generateDistanceMatrix(colors, mode = 'lab', threshold = 20) {
   const matrix = [];
@@ -87,12 +88,26 @@ class DistanceMatrix extends React.Component {
           <div className="ant-table-body" style={{ margin: 0 }}>
             <table>
               <tbody className="ant-table-tbody">
-                {matrix.map((row, i) => <tr key={i}>
-                  {row.map((cell, j) => <td key={j}
-                    style={{ background: cell.background, textAlign: 'right', border: '1px solid white' }}>
-                    {cell.content}
-                  </td>)}
-                </tr>)}
+                {
+                  matrix.map((row, i) => (
+                    <tr key={i}>
+                    {
+                      row.map((cell, j) => (
+                        cell.header ?
+                        <td style={{ textAlign: 'center' }}>
+                          <ColorBlock
+                            index={j} color={cell.background}
+                            showColor={i !== 0} showIndex={ i === 0 } />
+                        </td> :
+                        <td key={j}
+                          style={{ background: cell.background, textAlign: 'right', paddingRight: 1 }}>
+                          {cell.content}
+                        </td>
+                      ))
+                    }
+                    </tr>
+                  ))
+                }
               </tbody>
             </table>
           </div>

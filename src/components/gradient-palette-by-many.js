@@ -13,6 +13,7 @@ import {
   SketchPicker as Picker,
 } from 'react-color';
 import randomColor from '../util/random-color';
+import ColorBlock from './color-block';
 
 function paletteByColorRange(range, mode, count, bezier) {
   return chroma.scale(range)
@@ -132,8 +133,8 @@ class GradientPaletteByMany extends React.Component {
             <table style={{ fontFamily: 'Monospace' }}>
               <tbody className="ant-table-tbody">
                 <tr>
-                  {palette.map((c, i) => <td key={`${i}-${c}`} style={{ background: c, height: 48, border: '2px solid white' }}>
-                    &nbsp;
+                  {palette.map((c, i) => <td key={`${i}-${c}`}>
+                    <ColorBlock color={c}/>
                   </td>)}
                 </tr>
               </tbody>

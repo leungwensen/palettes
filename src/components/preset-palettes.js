@@ -5,9 +5,8 @@ import {
   map,
   some,
 } from 'lodash';
-import {
-  Collapse,
-} from 'antd'
+import Form from 'antd/es/form';
+import Collapse from 'antd/es/collapse';
 import palettes from '../palettes';
 
 const { Panel } = Collapse;

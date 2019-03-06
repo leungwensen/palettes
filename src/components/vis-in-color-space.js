@@ -3,11 +3,9 @@ import Plotly from 'plotly.js';
 import React from 'react';
 import _ from 'lodash';
 import chroma from 'chroma-js';
-import {
-  Form,
-  Radio,
-  Slider,
-} from 'antd'
+import Form from 'antd/es/form';
+import Radio from 'antd/es/radio';
+import Slider from 'antd/es/slider';
 import { COLOR_RANGE } from '../constants';
 
 const COLOR_SPACES = [

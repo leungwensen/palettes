@@ -14,26 +14,37 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',
           options: {
             presets: [
               '@babel/preset-env',
               '@babel/preset-flow',
-              '@babel/preset-react'
+              '@babel/preset-react',
             ],
             plugins: [
               '@babel/plugin-proposal-class-properties',
               '@babel/plugin-syntax-dynamic-import',
+              // ['import', {
+              //   libraryName: 'antd',
+              //   // style: true,
+              // }],
             ],
-            ignore: ['node_modules', 'build'],
-          }
-        }
+          },
+        },
       },
       {
         test: /\.less$/,
-        use: ['style-loader', 'css-loader', 'less-loader'],
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'less-loader',
+            options: {
+              javascriptEnabled: true,
+            },
+          },
+        ],
       },
       {
         test: /\.css$/,
@@ -44,11 +55,11 @@ module.exports = {
   devServer: {
     // contentBase: path.resolve(__dirname, 'assets')
     open: true,
-    publicPath: '/assets/'
+    publicPath: '/assets/',
   },
   externals: {
     'chroma-js': 'chroma',
-    'lodash': '_',
+    // 'lodash': '_',
     'plotly.js': 'Plotly',
     'react': 'React',
     'react-dom': 'ReactDOM',

@@ -1,10 +1,8 @@
 import CopyToClipboard from 'react-copy-to-clipboard';
 import React from 'react';
 import chroma from 'chroma-js';
-import {
-  Icon,
-  message,
-} from 'antd';
+import Icon from 'antd/es/icon';
+import message from 'antd/es/message';
 
 function noop() {
 }
@@ -39,7 +37,7 @@ export default class ColorBlock extends React.Component {
       onDelete = noop,
     } = this.props;
     return (
-      <CopyToClipboard onCopy={this.onCopied} title="click to copy color">
+      <CopyToClipboard text={color} onCopy={this.onCopied} title="click to copy color">
         <div
           className={`color-block${selected ? ' selected' : ''}`}
           style={this.getTextStyle()}>

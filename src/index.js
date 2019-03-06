@@ -3,15 +3,13 @@ import './css/index.less';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';
-import {
-  Button,
-  Divider,
-  Drawer,
-  Icon,
-  Layout,
-  List,
-  Menu,
-} from 'antd';
+import Button from 'antd/es/button';
+import Divider from 'antd/es/divider';
+import Drawer from 'antd/es/drawer';
+import Icon from 'antd/es/icon';
+import Layout from 'antd/es/layout';
+import List from 'antd/es/list';
+import Menu from 'antd/es/menu';
 import {
   SketchPicker as Picker,
 } from 'react-color';

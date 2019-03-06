@@ -1,12 +1,10 @@
 import React from 'react';
 import _ from 'lodash';
 import chroma from 'chroma-js';
-import {
-  Form,
-  Icon,
-  Radio,
-  Slider,
-} from 'antd'
+import Form from 'antd/es/form';
+import Icon from 'antd/es/icon';
+import Radio from 'antd/es/radio';
+import Slider from 'antd/es/slider';
 import getAntD3Palette from '../util/antd3-palette';
 import ColorBlock from './color-block';
 

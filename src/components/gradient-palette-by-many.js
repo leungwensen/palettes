@@ -37,15 +37,43 @@ for (let i = 0; i < MAX_PALETTE_SIZE; i += 1) {
 }
 
 class GradientPaletteByMany extends React.Component {
-  state = {
-    mode: MODES[3],
-    minCount: 2,
-    maxCount: 5,
-    count: 2,
-    minPaletteSize: 2,
-    maxPaletteSize: MAX_PALETTE_SIZE,
-    paletteSize: 5,
-    range: RANGE,
+  constructor(props) {
+    super(props);
+
+    const gpmMode = localStorage.getItem('gpmMode ') || MODES[0];
+    const gpmColorsCount = localStorage.getItem('gpmColorsCount') ?
+      parseInt(localStorage.getItem('gpmColorsCount'), 10) : 2;
+    const gpmPaletteSize = localStorage.getItem('gpmPaletteSize') ?
+      parseInt(localStorage.getItem('gpmPaletteSize'), 10) : 10;
+    const range = localStorage.getItem('gpmRange') ?
+      JSON.parse(localStorage.getItem('gpmRange')) : RANGE;
+
+    this.state = {
+      mode: gpmMode,
+      minCount: 2,
+      maxCount: 5,
+      count: gpmColorsCount,
+      minPaletteSize: 2,
+      maxPaletteSize: MAX_PALETTE_SIZE,
+      paletteSize: gpmPaletteSize,
+      range,
+    };
+  }
+
+  syncCache = () => {
+    requestAnimationFrame(() => {
+      localStorage.setItem('gpmMode', this.state.mode);
+      localStorage.setItem('gpmColorsCount', this.state.count);
+      localStorage.setItem('gpmPaletteSize', this.state.paletteSize);
+      localStorage.setItem('gpmRange', JSON.stringify(this.state.range));
+    });
+  }
+
+  componentDidMount() {
+    this.syncCache();
+  }
+  componentDidUpdate() {
+    this.syncCache();
   }
 
   render() {

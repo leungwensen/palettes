@@ -76,10 +76,10 @@ function draw3dScatter(id, palette, colorSpace, size) {
   const data = [trace];
   const layout = {
     scene: {
-      camera: {
-        eye: colorSpace === 'lab' ? { x: 0.5, y: 0.001, z: -2.5 } : { x: 0.001, y: -2, z: 1 },
-        center: { x: 0, y: 0, z: 0 }
-      }
+      // camera: {
+      //   eye: colorSpace === 'lab' ? { x: 0.5, y: 0.001, z: -2.5 } : { x: 0.001, y: -2, z: 1 },
+      //   center: { x: 0, y: 0, z: 0 }
+      // }
     },
     height: 420,
     margin: {

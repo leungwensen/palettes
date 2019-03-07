@@ -43,6 +43,7 @@ Color Palettes, view & make. https://leungwensen.github.io/palettes/
 
 - [x] copy color to clipboard
 - [x] palettes LOAD / SAVE to localStorage, etc.
+- [ ] (hold) use global state (like redux, etc.) to cache all component states
 - [ ] load palette from image
 - [ ] label in color blocks should switch color according to color
 - [ ] current palette save to localStorage

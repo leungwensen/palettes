@@ -157,6 +157,8 @@ class App extends React.Component {
             <Menu.Item key="DistanceMatrix"> Distance Matrix </Menu.Item>
             <Menu.Item key="GradientPaletteBy1"> Gradient Palette by 1 </Menu.Item>
             <Menu.Item key="GradientPaletteByMany"> Gradient Palette by Many </Menu.Item>
+            <Menu.Item key="PaletteByImage"> Palette by Image </Menu.Item>
+            <Menu.Item key="PaletteByColorSet"> Palette by Color Set </Menu.Item>
             <Menu.Item key="VisInCharts" disabled> Vis in Charts </Menu.Item>
           </Menu>
           <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
@@ -201,7 +203,9 @@ class App extends React.Component {
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
-            Palettes, View & Make
+            <p> Palettes, View & Make </p>
+            <p> https://github.com/leungwensen/palettes </p>
+            <p> leungwensen@gmail.com </p>
           </Footer>
         </Layout>
         {/* Drawer for preset palettes */}

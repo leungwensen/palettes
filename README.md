@@ -13,10 +13,9 @@ Color Palettes, view & make. https://leungwensen.github.io/palettes/
   - [x] LAB
   - [x] RGB
   - [x] HSV
-  - [ ] LCH
-  - ~~[ ] CMYK~~
-  - [ ] TEMP
-- [x] preset palettes (~1k palettes available)
+- [x] preset palettes (over 1k palettes available)
+  - [x] AntD3
+  - [x] CMOcean
   - [x] CMOcean
   - [x] CartoColors
   - [x] ColorBrewer2
@@ -24,18 +23,17 @@ Color Palettes, view & make. https://leungwensen.github.io/palettes/
   - [x] MatPlotLib
   - [x] MyCarta
   - [x] Tableau
+  - [x] Tableau10
   - [x] WesAnderson
 - [ ] show distance matrix of every pair colors in palette
   - [x] HCL
   - [x] HSL
   - [x] LAB
   - [x] RGB
-  - [ ] CMYK
-  - [ ] HSV
-  - [ ] LCH
-  - [ ] TEMP
 - [x] generate gradient palette from 1 color
 - [x] generate gradient palette from multiple colors
+- [ ] generate palette from color scale (using kmeans, force vector, etc.)
+- [ ] generate palette from image (quantize)
 - [ ] color blind testing
 - [ ] show palette in UI components / Charts
 
@@ -43,10 +41,11 @@ Color Palettes, view & make. https://leungwensen.github.io/palettes/
 
 - [x] copy color to clipboard
 - [x] palettes LOAD / SAVE to localStorage, etc.
+- [x] label in color blocks should switch color according to color
+- [x] current palette save to localStorage
+- [ ] D&D support to sort colors in palette
+- [ ] load palette from image / txt / JSON
 - [ ] (hold) use global state (like redux, etc.) to cache all component states
-- [ ] load palette from image
-- [ ] label in color blocks should switch color according to color
-- [ ] current palette save to localStorage
 - [ ] ...
 
 ## Thanks to

@@ -1,8 +1,10 @@
 import CopyToClipboard from 'react-copy-to-clipboard';
 import React from 'react';
 import chroma from 'chroma-js';
-import Icon from 'antd/es/icon';
-import message from 'antd/es/message';
+import {
+  Icon,
+  message,
+} from 'antd';
 
 function noop() {
 }

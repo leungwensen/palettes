@@ -3,13 +3,15 @@ import './css/index.less';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';
-import Button from 'antd/es/button';
-import Divider from 'antd/es/divider';
-import Drawer from 'antd/es/drawer';
-import Icon from 'antd/es/icon';
-import Layout from 'antd/es/layout';
-import List from 'antd/es/list';
-import Menu from 'antd/es/menu';
+import {
+  Button,
+  Divider,
+  Drawer,
+  Icon,
+  Layout,
+  List,
+  Menu,
+} from 'antd';
 import {
   SketchPicker as Picker,
 } from 'react-color';
@@ -17,6 +19,8 @@ import ColorBlock from './components/color-block';
 import DistanceMatrix from './components/distance-matrix';
 import GradientPaletteBy1 from './components/gradient-palette-by1';
 import GradientPaletteByMany from './components/gradient-palette-by-many';
+import PaletteByColorSet from './components/palette-by-color-set';
+import PaletteByImage from './components/palette-by-image';
 import PresetPalettes from './components/preset-palettes';
 import VisInCharts from './components/vis-in-charts';
 import VisInColorSpace from './components/vis-in-color-space';
@@ -154,12 +158,12 @@ class App extends React.Component {
             selectedKeys={[currentTab]}
             mode="horizontal">
             <Menu.Item key="VisInColorSpace"> Vis in Color Space </Menu.Item>
-            <Menu.Item key="DistanceMatrix"> Distance Matrix </Menu.Item>
+            <Menu.Item key="VisInCharts"> Vis in Charts </Menu.Item>
             <Menu.Item key="GradientPaletteBy1"> Gradient Palette by 1 </Menu.Item>
             <Menu.Item key="GradientPaletteByMany"> Gradient Palette by Many </Menu.Item>
             <Menu.Item key="PaletteByImage"> Palette by Image </Menu.Item>
-            <Menu.Item key="PaletteByColorSet"> Palette by Color Set </Menu.Item>
-            <Menu.Item key="VisInCharts" disabled> Vis in Charts </Menu.Item>
+            <Menu.Item key="DistanceMatrix"> Distance Matrix </Menu.Item>
+            <Menu.Item key="PaletteByColorSet" disabled> Palette by Color Set </Menu.Item>
           </Menu>
           <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
             <div
@@ -168,6 +172,11 @@ class App extends React.Component {
               {
                 currentTab === 'VisInColorSpace' && (
                   <VisInColorSpace colors={currentPalette}/>
+                )
+              }
+              {
+                currentTab === 'VisInCharts' && (
+                  <VisInCharts colors={currentPalette}/>
                 )
               }
               {
@@ -196,16 +205,33 @@ class App extends React.Component {
                 )
               }
               {
-                currentTab === 'VisInCharts' && (
-                  <VisInCharts colors={currentPalette}/>
+                currentTab === 'PaletteByImage' && (
+                  <PaletteByImage setPalette={(p) => {
+                    this.setState({
+                      currentPalette: p,
+                    });
+                  }}/>
+                )
+              }
+              {
+                currentTab === 'PaletteByColorSet' && (
+                  <PaletteByColorSet setPalette={(p) => {
+                    this.setState({
+                      currentPalette: p,
+                    });
+                  }}/>
                 )
               }
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
             <p> Palettes, View & Make </p>
-            <p> https://github.com/leungwensen/palettes </p>
-            <p> leungwensen@gmail.com </p>
+            <p>
+              <a href="https://github.com/leungwensen/palettes" target="_blank">https://github.com/leungwensen/palettes</a>
+            </p>
+            <p>
+              <a href="mailto:leungwensen@gmail.com" target="_blank">leungwensen@gmail.com</a>
+            </p>
           </Footer>
         </Layout>
         {/* Drawer for preset palettes */}
@@ -219,6 +245,7 @@ class App extends React.Component {
               this.setState({
                 currentPalette: palette.colors.concat(),
                 showPresetPalettes: false,
+                currentColor: palette.colors[0],
               });
             }}/>
         </Drawer>

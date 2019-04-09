@@ -1,12 +1,14 @@
 import React from 'react';
 import _ from 'lodash';
 import chroma from 'chroma-js';
-import Button from 'antd/es/button';
-import Divider from 'antd/es/divider';
-import Form from 'antd/es/form';
-import Icon from 'antd/es/icon';
-import Radio from 'antd/es/radio';
-import Slider from 'antd/es/slider';
+import {
+  Button,
+  Divider,
+  Form,
+  Icon,
+  Radio,
+  Slider
+} from 'antd';
 import {
   SketchPicker as Picker,
 } from 'react-color';

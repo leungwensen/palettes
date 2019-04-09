@@ -1,3 +1,5 @@
+import chroma from 'chroma-js';
+
 const pv = {
   map(arr, f) {
     const o = {};
@@ -17,7 +19,7 @@ const pv = {
       f ? (p, d, i) => {
         o.index = i;
         return p + f.call(o, d);
-      } : (p, d) => return p + d,
+      } : (p, d) => p + d,
       0
     );
   },
@@ -64,7 +66,7 @@ function PQueue(comparator) {
     size() {
       return contents.length;
     },
-    map()) {
+    map(f) {
       return contents.map(f);
     },
     debug() {
@@ -102,7 +104,7 @@ VBox.prototype = {
       for (i = vbox.r1; i <= vbox.r2; i++) {
         for (j = vbox.g1; j <= vbox.g2; j++) {
           for (k = vbox.b1; k <= vbox.b2; k++) {
-            index = getColorIndex(i,j,k);
+            const index = getColorIndex(i,j,k);
             npix += (histo[index] || 0);
           }
         }
@@ -195,7 +197,7 @@ CMap.prototype = {
     return this.nearest(color);
   },
   nearest(color) {
-    const vboxes = this.vboxes,
+    const vboxes = this.vboxes;
     let d1, d2, pColor;
     for (var i=0; i<vboxes.size(); i++) {
       d2 = Math.sqrt(
@@ -427,7 +429,7 @@ function quantize(pixels, maxcolors) {
   return cmap;
 }
 
-function paletteFromImage(canvas, n) {
+function paletteByImage(canvas, n) {
   const ctx = canvas.getContext('2d');
   const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
   const data = imageData.data;
@@ -442,5 +444,8 @@ function paletteFromImage(canvas, n) {
     arr.push([data[i], data[i + 1], data[i + 2]]);
   }
 
-  return quantize(arr, n).palette();
+  const rgbs = quantize(arr, n).palette();
+  return rgbs.map(rgb => chroma(...rgb).hex());
 }
+
+export default paletteByImage;

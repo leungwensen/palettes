@@ -66,3 +66,5 @@ package-lock.json
 # dist
 assets/bundle.js
 assets/bundle.js.map
+assets/1.bundle.js
+assets/1.bundle.js.map

@@ -56,7 +56,6 @@ class PaletteByImage extends React.Component {
     if (file) {
       palette = getPaletteByImage(canvas, count);
     }
-    console.log(palette);
     return <div>
       <Form layout="inline">
         <Form.Item label="">

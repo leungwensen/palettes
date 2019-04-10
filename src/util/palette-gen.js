@@ -16,7 +16,7 @@ ns.generate = function(colorsCount, checkColor, forceMode, quality, ultra_precis
 		distanceType = 'Default';
 	ultra_precision = ultra_precision || false
 
-	console.log('Generate palettes for '+colorsCount+' colors using color distance "'+distanceType+'"')
+	// console.log('Generate palettes for '+colorsCount+' colors using color distance "'+distanceType+'"')
 
 	if(forceMode){
 		// Force Vector Mode

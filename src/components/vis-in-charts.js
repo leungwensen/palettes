@@ -26,7 +26,6 @@ const PLOT_LAYOUT = {
 
 function randomNumberArray(count, range = RANGE) {
   const arr = [];
-  console.log(range);
   for (let i = 0; i < count; i ++) {
     arr.push(Math.random() * (range[1] - range[0]) + range[0]);
   }

@@ -49,7 +49,6 @@ function getSaturation(hsv, i, isLight) {
 
 function getValue(hsv, i, isLight) {
   const [h, s, v] = hsv;
-  console.log(v);
   if (isLight) {
     return _.clamp(v * 100 + brightnessStep1 * i, 0, 100);
   }
@@ -59,7 +58,6 @@ function getValue(hsv, i, isLight) {
 function colorPalette (color, index) {
   const isLight = index <= 6;
   const hsv = chroma(color).hsv();
-  console.log(hsv);
   const i = isLight ? lightColorCount + 1 - index : index - lightColorCount - 1;
   return chroma.hsv(
     getHue(hsv, i, isLight),

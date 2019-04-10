@@ -72,6 +72,7 @@ function drawLine(id, count, colors) {
   count = Math.round(count / 2);
   count = count > MAX_COUNT ? MAX_COUNT : count;
   const actualColors = repeat(colors, count);
+  const steps = 12;
   const traces = [];
   const layout = {
     ...PLOT_LAYOUT,
@@ -81,8 +82,8 @@ function drawLine(id, count, colors) {
   };
   for (let i = 0; i < count; i ++) {
     traces.push({
-      x: randomStringArray(20),
-      y: randomNumberArray(20),
+      x: randomStringArray(steps),
+      y: randomNumberArray(steps),
       mode: 'lines',
       type: 'lines',
       line: {
@@ -153,7 +154,7 @@ function drawHBar(id, count, colors) {
 }
 function drawSBar(id, count, colors) {
   count = count > MAX_COUNT ? MAX_COUNT : count;
-  const barCount = 12;
+  const barCount = 7;
   const actualColors = repeat(colors, count);
   const y = randomStringArray(barCount);
   const data = [];
@@ -163,6 +164,8 @@ function drawSBar(id, count, colors) {
       y,
       type: 'bar',
       orientation: 'h',
+      stackgroup: 'one',
+      groupnorm: 'percent',
       marker: {
         color: actualColors[i],
       },

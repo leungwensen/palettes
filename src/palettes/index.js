@@ -11,6 +11,7 @@ module.exports = {
   ColorBrewer2: require('./color-brewer2'),
   CubeHelix: require('./cube-helix'),
   KeplerGL: require('./kepler-gl'),
+  Lipstick: require('./lipstick'),
   MatPlotLib: require('./mat-plot-lib'),
   MyCarta: require('./my-carta'),
   Tableau: require('./tableau'),

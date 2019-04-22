@@ -24,6 +24,7 @@ import PaletteByImage from './components/palette-by-image';
 import PresetPalettes from './components/preset-palettes';
 import VisInCharts from './components/vis-in-charts';
 import VisInColorSpace from './components/vis-in-color-space';
+import SiteFooter from './components/site-footer';
 import palettes from './palettes';
 
 const {
@@ -225,13 +226,7 @@ class App extends React.Component {
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
-            <p> Palettes, View & Make </p>
-            <p>
-              <a href="https://github.com/leungwensen/palettes" target="_blank">https://github.com/leungwensen/palettes</a>
-            </p>
-            <p>
-              <a href="mailto:leungwensen@gmail.com" target="_blank">leungwensen@gmail.com</a>
-            </p>
+            <SiteFooter/>
           </Footer>
         </Layout>
         {/* Drawer for preset palettes */}

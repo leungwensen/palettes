@@ -7,8 +7,9 @@
     "build": "webpack",
     "dist": "webpack --config webpack.config.prod.js",
     "gh-pages": "npm run dist && gh-pages -d assets",
-    "start:dev": "webpack-dev-server",
+    "start:dev": "webpack",
     "start": "npm run start:dev",
+    "start:server": "node ./bin/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -44,12 +45,20 @@
   "dependencies": {
     "antd": "^3.13.6",
     "chroma-js": "^2.0.3",
+    "connect": "^3.6.6",
+    "delivery": "0.0.6",
     "lodash": "^4.17.11",
+    "moment": "^2.24.0",
+    "mysql": "^2.16.0",
     "plotly.js": "^1.45.0",
     "react": "^16.8.3",
     "react-color": "^2.17.0",
     "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.8.3",
-    "react-grid-layout": "^0.16.6"
+    "react-grid-layout": "^0.16.6",
+    "serve-index": "^1.9.1",
+    "serve-static": "^1.13.2",
+    "socket.io": "^2.2.0",
+    "urlrouter": "^0.5.4"
   }
 }

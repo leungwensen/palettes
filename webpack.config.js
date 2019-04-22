@@ -2,11 +2,14 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
+  mode: 'development',
   devtool: 'cheap-source-map',
-  entry: './src/index.js',
+  entry: {
+    bundle: './src/index.js',
+    distance: './src/forms/distance.js',
+  },
   output: {
     path: path.resolve(__dirname, 'assets'),
-    filename: 'bundle.js',
     library: 'APP',
     libraryTarget: 'umd',
   },
@@ -46,23 +49,25 @@ module.exports = {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
-      {
-        loader:'webpack-ant-icon-loader',
-        enforce: 'pre',
-        include:[
-          path.resolve('node_modules/@ant-design/icons/lib/dist')
-        ]
-      },
+      // {
+      //   loader:'webpack-ant-icon-loader',
+      //   enforce: 'pre',
+      //   include:[
+      //     path.resolve('node_modules/@ant-design/icons/lib/dist')
+      //   ]
+      // },
     ]
   },
-  devServer: {
-    // contentBase: path.resolve(__dirname, 'assets')
-    open: true,
-    publicPath: '/assets/',
+  watch: true,
+  watchOptions: {
+    aggregateTimeout: 300,
+    poll: 1000,
+    ignored: /node_modules/,
   },
   externals: {
     'chroma-js': 'chroma',
     // 'lodash': '_',
+    'socket.io-client': 'io',
     'plotly.js': 'Plotly',
     'react': 'React',
     'react-dom': 'ReactDOM',

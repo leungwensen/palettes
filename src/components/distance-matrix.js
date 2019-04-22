@@ -96,7 +96,7 @@ class DistanceMatrix extends React.Component {
                         cell.header ?
                         <td style={{ textAlign: 'center' }}>
                           <ColorBlock
-                            index={j} color={cell.background}
+                            index={j - 1} color={cell.background}
                             showColor={i !== 0} showIndex={ i === 0 } />
                         </td> :
                         <td key={j}
